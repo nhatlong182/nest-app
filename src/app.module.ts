@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProductModule } from './modules/product/product.module';
+import { RouterModule } from '@nestjs/core';
+import { Routes } from './routes/route';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { ProductModule } from './modules/product/product.module';
     TypeOrmModule.forRoot({
       ...dataSourceOptions,
     }),
+    RouterModule.register(Routes),
     UserModule,
     AuthModule,
     ProductModule,

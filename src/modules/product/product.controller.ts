@@ -3,7 +3,7 @@ import { Body, Post } from '@nestjs/common';
 import { Controller, Get, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 
-@Controller('products')
+@Controller()
 export class ProductController {
   constructor(private readonly productsService: ProductService) {}
 
