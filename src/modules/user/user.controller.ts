@@ -29,10 +29,4 @@ export class UserController {
     const user = await this.usersService.getUser(id);
     return SendResponse.success(user);
   }
-
-  @Post()
-  async createUser(@Body() user: CreateUserDto) {
-    const newUser = await this.usersService.create(user);
-    return SendResponse.success(newUser);
-  }
 }

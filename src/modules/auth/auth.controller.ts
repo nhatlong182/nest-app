@@ -1,37 +1,42 @@
+import { ErrorException } from './../../common/response/error-response';
 import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   Post,
-  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
-import { LoginPostDTO } from './dto/auth.dto';
+import { LoginDto, RegisterDto } from './dto/auth.dto';
+import code from 'src/common/response/status-code';
+import { SendResponse } from 'src/common/response/send-response';
 
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('login')
-  async login(@Body() user: LoginPostDTO) {
-    try {
-      const existUser = await this.authService.login(user);
-      if (!existUser) return 'not found';
-
-      const token = await this.authService.signTokenVerify(user);
-
-      return { ...existUser, token };
-    } catch (error) {
-      return 'error';
-    }
+  @Post('register')
+  signupLocal(@Body() dto: RegisterDto) {
+    return this.authService.register(dto);
   }
 
-  @Get('test')
+  @Post('login')
+  async login(@Body() user: LoginDto) {
+    return this.authService.login(user);
+  }
+
+  @Post('logout')
   @UseGuards(AuthGuard('jwt'))
-  testApi() {
-    return 'ok';
+  async logout(@Req() req) {
+    return this.authService.logout(req.user.userId);
+  }
+
+  @Post('refresh')
+  @UseGuards(AuthGuard('jwt-refresh'))
+  async refresh(@Req() req) {
+    return this.authService.refresh(req.user.userId, req.user.refreshToken);
   }
 }

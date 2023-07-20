@@ -42,28 +42,4 @@ export class UserService {
   public hashPassword(password: string) {
     return bcrypt.hashSync(password, 12);
   }
-
-  async create(body: CreateUserDto) {
-    const { email, password, fullName } = body;
-    const isExistUser = await this.userRepo.findOneBy({
-      email,
-    });
-
-    if (isExistUser) {
-      throw new ErrorException(
-        HttpStatus.CONFLICT,
-        code.USER_EXISTED.code,
-        code.USER_EXISTED.type,
-      );
-    }
-
-    const newUser = await this.userRepo.save({
-      email,
-      password: this.hashPassword(password),
-      status: 1,
-      fullName,
-    });
-
-    return plainToClass(UserDto, newUser);
-  }
 }
