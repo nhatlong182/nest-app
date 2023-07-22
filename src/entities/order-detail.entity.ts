@@ -10,11 +10,12 @@ export class OrderDetailEntity extends Base {
 
   @ManyToOne(() => OrderEntity, (OrderEntity) => OrderEntity.order_details)
   @JoinColumn({ name: 'order_id' })
-  orders: OrderEntity;
+  order: OrderEntity;
 
   @ManyToOne(
     () => ProductEntity,
     (ProductEntity) => ProductEntity.order_details,
+    { eager: true },
   )
   @JoinColumn({ name: 'product_id' })
   product: ProductEntity;

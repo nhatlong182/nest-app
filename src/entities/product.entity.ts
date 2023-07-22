@@ -10,6 +10,9 @@ export class ProductEntity extends Base {
   @Column({ name: 'description', type: 'text' })
   description: string;
 
+  @Column({ type: 'int' })
+  quantity: number;
+
   @OneToMany(
     () => OrderDetailEntity,
     (OrderDetailEntity) => OrderDetailEntity.product,

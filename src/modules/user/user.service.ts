@@ -1,9 +1,8 @@
-import { CreateUserDto, UserDto } from './dto/user.dto';
+import { UserDto } from './dto/user.dto';
 import { UserEntity } from '../../entities/user.entity';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { plainToClass } from 'class-transformer';
 import { ErrorException } from 'src/common/response/error-response';
 import code from 'src/common/response/status-code';
@@ -37,9 +36,5 @@ export class UserService {
       );
 
     return plainToClass(UserDto, user);
-  }
-
-  public hashPassword(password: string) {
-    return bcrypt.hashSync(password, 12);
   }
 }

@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ProductModule } from './modules/product/product.module';
 import { RouterModule } from '@nestjs/core';
 import { Routes } from './routes/route';
+import { OrderModule } from './modules/order/order.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { Routes } from './routes/route';
     UserModule,
     AuthModule,
     ProductModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

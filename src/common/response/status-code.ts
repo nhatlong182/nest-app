@@ -18,5 +18,10 @@ const code = {
     type: 'USER_EXISTED',
     msg: 'User email existed!',
   },
+  PRODUCT_EXISTED: {
+    code: 1005,
+    type: 'PRODUCT_EXISTED',
+    msg: 'Product existed!',
+  },
 };
 export default code;

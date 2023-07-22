@@ -6,10 +6,10 @@ import {
   Body,
   Query,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { SendResponse } from 'src/common/response/send-response';
-import { CreateUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 
 @Controller()

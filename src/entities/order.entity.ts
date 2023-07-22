@@ -5,13 +5,16 @@ import { UserEntity } from './user.entity';
 
 @Entity({ name: 'order' })
 export class OrderEntity extends Base {
-  @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.orders)
+  @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.orders, {
+    eager: true,
+  })
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
   @OneToMany(
     () => OrderDetailEntity,
-    (OrderDetailEntity) => OrderDetailEntity.orders,
+    (OrderDetailEntity) => OrderDetailEntity.order,
+    { eager: true },
   )
   order_details: OrderDetailEntity[];
 }
